@@ -1,0 +1,288 @@
+/**
+ * 推荐流页面样式
+ * 抖音风格：全屏滑动 + Scroll Snap
+ */
+
+/* 全屏滚动容器 */
+.feed {
+  height: 100vh;
+  height: 100dvh; /* 移动端动态视口高度 */
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  background: #000;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* 隐藏滚动条但保持功能 */
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.feed {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* 论文列表 */
+.feed__list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 每个卡片项 - 全屏吸附 */
+.feed__item {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* 滚动触发器（无限加载） */
+.feed__observer {
+  position: absolute;
+  bottom: 200px;
+  height: 1px;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* 到底提示 */
+.feed__end {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+  color: #6b7280;
+  font-size: 1rem;
+  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a2e 100%);
+}
+
+.feed__end-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.feed__end p {
+  margin: 0;
+}
+
+/* 加载状态 */
+.feed__loading {
+  height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.feed__spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #333;
+  border-top-color: #fe2c55;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 错误和空状态 - 全屏 */
+.feed--error,
+.feed--empty {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scroll-snap-type: none;
+}
+
+.feed__error,
+.feed__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.feed__error-icon,
+.feed__empty-icon {
+  font-size: 4rem;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+
+.feed__error h2,
+.feed__empty h2 {
+  margin: 0 0 12px;
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.feed__error p,
+.feed__empty p {
+  margin: 0 0 24px;
+  color: #a0a0a0;
+  line-height: 1.6;
+}
+
+.feed__retry-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, #fe2c55 0%, #ff6b6b 100%);
+  color: white;
+  border: none;
+  border-radius: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feed__retry-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(254, 44, 85, 0.4);
+}
+
+.feed__retry-btn:active {
+  transform: scale(0.98);
+}
+
+/* Toast 通知 */
+.feed__toasts {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: toastIn 0.3s ease;
+  pointer-events: auto;
+  font-size: 0.95rem;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.toast--success {
+  background: rgba(16, 185, 129, 0.9);
+}
+
+.toast--error {
+  background: rgba(239, 68, 68, 0.9);
+}
+
+.toast--info {
+  background: rgba(59, 130, 246, 0.9);
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 分类筛选器位置调整 */
+.feed .category-filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  padding: 12px 0 24px;
+}
+
+/* 滑动提示（首次进入时显示） */
+.feed__swipe-hint {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+  animation: hintBounce 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.feed__swipe-hint-icon {
+  font-size: 1.5rem;
+  animation: hintArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes hintBounce {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes hintArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* 响应式 - 移动端优化 */
+@media (max-width: 768px) {
+  .feed__error h2,
+  .feed__empty h2 {
+    font-size: 1.25rem;
+  }
+  
+  .feed__retry-btn {
+    padding: 12px 28px;
+    font-size: 0.95rem;
+  }
+}
+
+/* 安全区域适配（刘海屏等） */
+@supports (padding: max(0px)) {
+  .feed {
+    padding-top: max(0px, env(safe-area-inset-top));
+    padding-bottom: max(0px, env(safe-area-inset-bottom));
+  }
+}

@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  mode: debug  # debug, release
+
+arxiv:
+  base_url: "http://export.arxiv.org/api/query"
+  timeout: 10s
+  max_retries: 3
+
+cache:
+  enabled: true
+  ttl: 300s  # 5 minutes
+
+cors:
+  allowed_origins:
+    - "http://localhost:5173"
+    - "http://localhost:5174"
+    - "http://localhost:5175"
+    - "http://localhost:3000"
+    - "https://*.vercel.app"
+    - "https://papertok.vercel.app"
+    - "https://papertok-api.fly.dev"

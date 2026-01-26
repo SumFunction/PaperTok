@@ -1,0 +1,101 @@
+/**
+ * 分类筛选器样式
+ * 抖音风格：固定在顶部，渐变背景
+ */
+
+.category-filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%);
+  padding: max(12px, env(safe-area-inset-top)) 0 24px;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.category-filter__container {
+  max-width: 100%;
+  padding: 0 16px;
+  pointer-events: auto;
+}
+
+.category-filter__list {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 4px 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+.category-filter__list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-filter__item {
+  flex-shrink: 0;
+}
+
+.category-filter__button {
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.category-filter__button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.category-filter__button:active {
+  transform: scale(0.95);
+}
+
+.category-filter__button--active {
+  background: #fe2c55;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.category-filter__button--active:hover {
+  background: #ff4d6d;
+}
+
+/* 移动端优化 */
+@media (max-width: 640px) {
+  .category-filter {
+    padding: max(8px, env(safe-area-inset-top)) 0 20px;
+  }
+  
+  .category-filter__container {
+    padding: 0 12px;
+  }
+
+  .category-filter__button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 横屏优化 */
+@media (orientation: landscape) and (max-height: 500px) {
+  .category-filter {
+    padding: 8px 0 16px;
+  }
+  
+  .category-filter__button {
+    padding: 4px 12px;
+    font-size: 0.8rem;
+  }
+}

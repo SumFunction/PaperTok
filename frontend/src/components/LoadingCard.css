@@ -1,0 +1,107 @@
+/**
+ * 加载骨架屏样式
+ */
+
+.loading-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loading-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.loading-card__cover {
+  width: 100%;
+  height: 300px;
+}
+
+.loading-card__content {
+  padding: 20px;
+}
+
+.loading-card__title {
+  height: 28px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.loading-card__meta {
+  height: 16px;
+  width: 60%;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+
+.loading-card__summary {
+  height: 14px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.loading-card__summary:nth-child(4) {
+  width: 90%;
+}
+
+.loading-card__summary:nth-child(5) {
+  width: 80%;
+}
+
+.loading-card__summary:nth-child(6) {
+  width: 70%;
+}
+
+.loading-card__actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.loading-card__action {
+  flex: 1;
+  height: 40px;
+  border-radius: 8px;
+}
+
+/* 闪烁动画 */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.loading-card__shimmer {
+  background: #2a2a2a;
+  background-image: linear-gradient(
+    to right,
+    #2a2a2a 0%,
+    #3a3a3a 20%,
+    #2a2a2a 40%,
+    #2a2a2a 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 468px 100%;
+  animation: shimmer 1.5s infinite linear forwards;
+}
+
+@media (max-width: 640px) {
+  .loading-card__cover {
+    height: 250px;
+  }
+
+  .loading-card__content {
+    padding: 16px;
+  }
+}
