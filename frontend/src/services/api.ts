@@ -7,7 +7,8 @@ import axios, { type AxiosInstance, type AxiosError } from 'axios';
 import type { Paper, ApiResponse, PapersResponse } from '../types';
 
 // API 基础 URL
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+// 生产环境使用相对路径（通过 Nginx 代理），开发环境使用 localhost:8080
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 /**
  * 创建 axios 实例
