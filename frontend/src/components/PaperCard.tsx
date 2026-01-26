@@ -48,7 +48,7 @@ export function PaperCard({
   const [imageError, setImageError] = useState(false);
   const [showDoubleTapHeart, setShowDoubleTapHeart] = useState(false);
   const lastTapRef = useRef<number>(0);
-  const tapTimeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const tapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // 获取作者首字母作为头像
   const getAuthorInitial = () => {
