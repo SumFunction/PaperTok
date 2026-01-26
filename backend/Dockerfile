@@ -3,6 +3,10 @@ FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 
+# 设置 Go 代理为国内镜像（加速下载）
+ENV GOPROXY=https://goproxy.cn,https://mirrors.aliyun.com/goproxy/,direct
+ENV GO111MODULE=on
+
 # Install dependencies
 RUN apk add --no-cache git ca-certificates
 
