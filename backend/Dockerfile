@@ -17,7 +17,8 @@ RUN go mod download
 # Copy source code
 COPY . .
 
-# Build the application
+# Tidy and build the application
+RUN go mod tidy
 RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o /app/server ./cmd/server
 
 # Runtime stage
