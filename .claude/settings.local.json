@@ -21,7 +21,16 @@
       "Bash(done sleep:*)",
       "Bash(tree:*)",
       "Bash(python3:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(new了我们/etc/passwd)",
+      "Bash(go test:*)",
+      "Bash(gofmt:*)",
+      "Bash(go vet:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls:*)",
+      "Bash(go version:*)",
+      "Bash(chmod:*)",
+      "Bash(pwdx:*)"
     ]
   }
 }

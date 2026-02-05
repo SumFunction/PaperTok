@@ -64,6 +64,8 @@ export const STORAGE_KEYS = {
   FAVORITE_PAPERS: 'papertok_favorites',
   VIEWED_PAPERS: 'papertok_viewed',
   PREFERENCES: 'papertok_preferences',
+  AUTH_TOKEN: 'papertok_token',
+  AUTH_USER: 'papertok_user',
 } as const;
 
 /**
@@ -81,6 +83,50 @@ export const CATEGORIES: Category[] = [
   { id: 'cs.DB', name: '数据库', description: 'Databases' },
   { id: 'cs.DS', name: '数据结构与算法', description: 'Data Structures and Algorithms' },
 ];
+
+/**
+ * 用户信息
+ */
+export interface User {
+  id: number;
+  username: string;
+  email: string;
+  created_at: string;
+}
+
+/**
+ * 认证响应
+ */
+export interface AuthResponse {
+  user: User;
+  token: string;
+}
+
+/**
+ * 登录请求
+ */
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+/**
+ * 注册请求
+ */
+export interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+}
+
+/**
+ * API 错误响应
+ */
+export interface ApiError {
+  success: false;
+  error: string;
+  timestamp: number;
+}
 
 /**
  * 应用全局状态

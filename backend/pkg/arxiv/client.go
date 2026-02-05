@@ -70,6 +70,49 @@ func (c *Client) FetchPapers(category string, maxResults int, sortBy string) (*F
 	return &feed, nil
 }
 
+// FetchPapersWithOffset fetches papers from arXiv API with offset/pagination support
+func (c *Client) FetchPapersWithOffset(category string, maxResults int, sortBy string, offset int) (*Feed, error) {
+	// Build query parameters
+	params := url.Values{}
+	// 如果 category 为空，使用通用搜索获取最新论文
+	var searchQuery string
+	if category == "" {
+		searchQuery = "cat:cs.* OR cat:stat.* OR cat:math.*"
+	} else {
+		searchQuery = fmt.Sprintf("cat:%s", category)
+	}
+	params.Add("search_query", searchQuery)
+	params.Add("sortBy", sortBy)
+	params.Add("sortOrder", "descending")
+	params.Add("max_results", fmt.Sprintf("%d", maxResults))
+	params.Add("start", fmt.Sprintf("%d", offset)) // 添加分页支持
+
+	// Make request
+	reqURL := fmt.Sprintf("%s?%s", c.baseURL, params.Encode())
+	resp, err := c.httpClient.Get(reqURL)
+	if err != nil {
+		return nil, fmt.Errorf("failed to fetch from arXiv: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("arXiv API returned status %d", resp.StatusCode)
+	}
+
+	// Parse response
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	var feed Feed
+	if err := xml.Unmarshal(body, &feed); err != nil {
+		return nil, fmt.Errorf("failed to parse XML response: %w", err)
+	}
+
+	return &feed, nil
+}
+
 // SearchPapers searches papers by keyword
 func (c *Client) SearchPapers(query string, maxResults int) (*Feed, error) {
 	// Build query parameters

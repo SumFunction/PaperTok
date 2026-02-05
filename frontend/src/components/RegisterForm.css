@@ -1,0 +1,449 @@
+/**
+ * 注册表单样式
+ * 抖音风格：简洁、现代、深色主题
+ */
+
+.register-form {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+/* 头部 */
+.register-form__header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.register-form__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
+}
+
+.register-form__subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+/* 错误提示 */
+.register-form__error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  background: rgba(254, 44, 85, 0.12);
+  border: 1px solid rgba(254, 44, 85, 0.25);
+  border-radius: 12px;
+  color: #fe2c55;
+  font-size: 0.875rem;
+  animation: errorShake 0.4s ease;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.register-form__error-icon {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+/* 表单 */
+.register-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 表单字段 */
+.register-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: transform 0.2s ease;
+}
+
+.register-form__field--focused {
+  transform: translateY(-2px);
+}
+
+.register-form__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s ease;
+}
+
+.register-form__field--focused .register-form__label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 输入框容器 */
+.register-form__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.register-form__input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.register-form__input--password {
+  padding-right: 48px;
+}
+
+.register-form__input::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.register-form__input:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.register-form__input:focus {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fe2c55;
+  box-shadow: 0 0 0 4px rgba(254, 44, 85, 0.15);
+}
+
+.register-form__input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.register-form__input--error {
+  border-color: #fe2c55;
+  background: rgba(254, 44, 85, 0.08);
+}
+
+.register-form__input--error:focus {
+  box-shadow: 0 0 0 4px rgba(254, 44, 85, 0.2);
+}
+
+.register-form__input--valid {
+  border-color: rgba(37, 244, 238, 0.5);
+}
+
+.register-form__input--valid:focus {
+  box-shadow: 0 0 0 4px rgba(37, 244, 238, 0.15);
+}
+
+/* 字符计数 */
+.register-form__char-count {
+  position: absolute;
+  right: 14px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* 密码可见性切换按钮 */
+.register-form__toggle-password {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.register-form__toggle-password:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.register-form__toggle-password:active {
+  transform: scale(0.95);
+}
+
+.register-form__field-error {
+  font-size: 0.8rem;
+  color: #fe2c55;
+  padding-left: 2px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 密码强度指示条 */
+.register-form__strength-bar {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+/* 密码强度提示文字 */
+.register-form__strength-hint {
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: right;
+}
+
+.register-form__strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.register-form__strength-fill--weak {
+  background: #fe2c55;
+}
+
+.register-form__strength-fill--medium {
+  background: linear-gradient(90deg, #fe2c55 0%, #ffb800 100%);
+}
+
+.register-form__strength-fill--strong {
+  background: linear-gradient(90deg, #fe2c55 0%, #ffb800 50%, #25f4ee 100%);
+}
+
+/* 密码要求清单 */
+.register-form__password-requirements {
+  padding: 8px 12px;
+  margin-top: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 10px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.register-form__requirements-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0 0 8px 0;
+}
+
+.register-form__requirements-hint {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.register-form__requirements-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px 12px;
+}
+
+.register-form__requirement {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.45);
+  transition: color 0.2s ease;
+}
+
+.register-form__requirement--passed {
+  color: #25f4ee;
+}
+
+.register-form__requirement-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.register-form__requirement-dot {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+.register-form__requirement--passed .register-form__requirement-icon {
+  color: #25f4ee;
+}
+
+/* 提交按钮 */
+.register-form__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 15px 24px;
+  margin-top: 16px;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #fe2c55 0%, #ff4d6d 100%);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 6px 16px rgba(254, 44, 85, 0.35);
+}
+
+.register-form__submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(254, 44, 85, 0.35);
+}
+
+.register-form__submit:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(254, 44, 85, 0.3);
+}
+
+.register-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.register-form__submit--loading {
+  pointer-events: none;
+}
+
+/* 加载动画 */
+.register-form__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 切换提示 */
+.register-form__switch-hint {
+  margin-top: 12px;
+  margin-bottom: 20px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+.register-form__switch-hint strong {
+  color: #fe2c55;
+  font-weight: 600;
+}
+
+/* 底部链接 */
+.register-form__footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.register-form__link {
+  color: #fe2c55;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.register-form__link:hover {
+  color: #ff6b8a;
+}
+
+/* 响应式适配 */
+@media (max-width: 480px) {
+  .register-form {
+    padding: 0 12px;
+  }
+
+  .register-form__title {
+    font-size: 1.5rem;
+  }
+
+  .register-form__input {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  .register-form__input--password {
+    padding-right: 44px;
+  }
+
+  .register-form__submit {
+    padding: 12px 20px;
+    border-radius: 10px;
+  }
+
+  .register-form__toggle-password {
+    right: 10px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .register-form__requirements-list {
+    grid-template-columns: 1fr;
+  }
+
+  .register-form__password-requirements {
+    padding: 10px 12px;
+  }
+}

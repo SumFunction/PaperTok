@@ -1,0 +1,406 @@
+/**
+ * 认证模态框样式
+ * 抖音风格：全屏半透明遮罩 + 中心圆角卡片 + 平滑动画
+ */
+
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  animation: modalFadeIn 0.25s ease;
+}
+
+.auth-modal--closing {
+  animation: modalFadeOut 0.2s ease forwards;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* 内容卡片 */
+.auth-modal__content {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  max-height: 85vh;
+  background: linear-gradient(180deg, #1f1f1f 0%, #161616 100%);
+  border-radius: 20px;
+  padding: 24px 20px;
+  box-shadow: 
+    0 24px 48px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: modalContentEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.auth-modal__content--closing {
+  animation: modalContentExit 0.2s ease forwards;
+}
+
+@keyframes modalContentEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalContentExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+}
+
+/* 关闭按钮 */
+.auth-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  border-radius: 50%;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 10;
+}
+
+.auth-modal__close:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  transform: rotate(90deg);
+}
+
+.auth-modal__close:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+/* Logo */
+.auth-modal__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.auth-modal__logo-icon {
+  font-size: 1.75rem;
+}
+
+.auth-modal__logo-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fe2c55 0%, #ff6b8a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 场景标题 */
+.auth-modal__scene-header {
+  text-align: center;
+  margin-bottom: 18px;
+  padding: 12px 12px;
+  background: rgba(254, 44, 85, 0.08);
+  border-radius: 12px;
+  border: 1px solid rgba(254, 44, 85, 0.15);
+}
+
+.auth-modal__scene-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+.auth-modal__scene-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Tab 切换 */
+.auth-modal__tabs {
+  position: relative;
+  display: flex;
+  margin-bottom: 18px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+.auth-modal__tab {
+  flex: 1;
+  position: relative;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.6);
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+}
+
+.auth-modal__tab:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.auth-modal__tab--active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.auth-modal__tab-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: linear-gradient(135deg, #fe2c55 0%, #ff4d6d 100%);
+  border-radius: 10px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 0;
+}
+
+/* 表单内容区域 */
+.auth-modal__body {
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-modal__forms {
+  display: flex;
+  width: 200%;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.auth-modal__form-panel {
+  width: 50%;
+  flex-shrink: 0;
+}
+
+/* 覆盖 LoginForm/RegisterForm 的部分样式以适应模态框 */
+.auth-modal__body .login-form__header,
+.auth-modal__body .register-form__header {
+  display: none;
+}
+
+.auth-modal__body .login-form,
+.auth-modal__body .register-form {
+  padding: 0;
+  max-width: none;
+}
+
+.auth-modal__body .login-form__footer,
+.auth-modal__body .register-form__footer {
+  display: none;
+}
+
+/* 底部服务条款 */
+.auth-modal__footer {
+  margin-top: 16px;
+  padding-top: 16px;
+  padding-bottom: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-modal__terms {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.auth-modal__terms-link {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  margin: 0 2px;
+  transition: color 0.2s ease;
+}
+
+.auth-modal__terms-link:hover {
+  color: #fe2c55;
+}
+
+/* 滚动条样式 */
+.auth-modal__content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.auth-modal__content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  margin: 8px 0;
+}
+
+.auth-modal__content::-webkit-scrollbar-thumb {
+  background: rgba(254, 44, 85, 0.6);
+  border-radius: 5px;
+  border: 2px solid rgba(31, 31, 31, 0.5);
+}
+
+.auth-modal__content::-webkit-scrollbar-thumb:hover {
+  background: rgba(254, 44, 85, 0.8);
+}
+
+.auth-modal__content::-webkit-scrollbar-thumb:active {
+  background: #fe2c55;
+}
+
+/* 移动端适配 */
+@media (max-width: 480px) {
+  .auth-modal {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .auth-modal__content {
+    max-width: 100%;
+    max-height: 88vh;
+    border-radius: 24px 24px 0 0;
+    padding: 20px 16px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow-y: auto !important;
+  }
+
+  .auth-modal__content--closing {
+    animation: slideDown 0.25s ease forwards;
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+  }
+
+  .auth-modal__logo {
+    margin-bottom: 20px;
+  }
+
+  .auth-modal__logo-icon {
+    font-size: 1.75rem;
+  }
+
+  .auth-modal__logo-text {
+    font-size: 1.35rem;
+  }
+
+  .auth-modal__scene-header {
+    padding: 14px 10px;
+    margin-bottom: 20px;
+  }
+
+  .auth-modal__scene-title {
+    font-size: 1rem;
+  }
+
+  .auth-modal__scene-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .auth-modal__tabs {
+    margin-bottom: 20px;
+  }
+
+  .auth-modal__tab {
+    padding: 11px 16px;
+    font-size: 0.95rem;
+  }
+
+  .auth-modal__close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .auth-modal__footer {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+}
+
+/* 超小屏幕适配 */
+@media (max-width: 360px) {
+  .auth-modal__content {
+    padding: 20px 16px;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0));
+  }
+
+  .auth-modal__tab {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  .auth-modal__logo-icon {
+    font-size: 1.5rem;
+  }
+
+  .auth-modal__logo-text {
+    font-size: 1.2rem;
+  }
+}

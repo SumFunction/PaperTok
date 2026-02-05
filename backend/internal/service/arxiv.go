@@ -35,14 +35,15 @@ func NewArxivService(client *arxiv.Client, cache CacheService, cacheTTL time.Dur
 
 // FetchPapers fetches papers from arXiv or cache
 func (s *arxivServiceImpl) FetchPapers(ctx context.Context, req *model.FetchRequest) ([]*model.Paper, error) {
-	// Try cache first
-	cacheKey := s.buildCacheKey(req.Category)
+	// 缓存键需要包含 offset，以支持分页
+	cacheKey := s.buildCacheKeyWithOffset(req.Category, req.Offset, req.MaxResults)
 	if papers, found := s.cache.Get(cacheKey); found {
 		return papers, nil
 	}
 
-	// Fetch from arXiv
-	feed, err := s.client.FetchPapers(req.Category, req.MaxResults, req.SortBy)
+	// Fetch from arXiv with offset support
+	// arXiv API uses 'start' parameter for pagination
+	feed, err := s.client.FetchPapersWithOffset(req.Category, req.MaxResults, req.SortBy, req.Offset)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch papers: %w", err)
 	}
@@ -158,6 +159,11 @@ func (s *arxivServiceImpl) buildPaperCacheKey(paperID string) string {
 // buildCacheKey builds a cache key for the category
 func (s *arxivServiceImpl) buildCacheKey(category string) string {
 	return fmt.Sprintf("papers:%s", category)
+}
+
+// buildCacheKeyWithOffset builds a cache key including offset for pagination
+func (s *arxivServiceImpl) buildCacheKeyWithOffset(category string, offset, limit int) string {
+	return fmt.Sprintf("papers:%s:offset:%d:limit:%d", category, offset, limit)
 }
 
 // cleanText cleans up text from arXiv

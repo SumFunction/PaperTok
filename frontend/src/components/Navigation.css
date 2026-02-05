@@ -59,6 +59,17 @@
   transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   min-width: 64px;
+  /* 为按钮样式重置 */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* 登录按钮特殊样式 */
+.navigation__login-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .navigation__link:hover {
@@ -209,26 +220,117 @@
   }
 }
 
+/* 用户信息区域 */
+.navigation__item--user {
+  flex: none;
+}
+
+.navigation__user {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+}
+
+.navigation__user-name {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navigation__logout {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navigation__logout:hover {
+  background: rgba(254, 44, 85, 0.2);
+  border-color: rgba(254, 44, 85, 0.3);
+  color: #fe2c55;
+}
+
+.navigation__logout:active {
+  transform: scale(0.95);
+}
+
+.navigation__logout:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* 横屏手机 */
 @media (orientation: landscape) and (max-height: 500px) {
   .navigation {
     padding-bottom: 0;
   }
-  
+
   .navigation__container {
     padding: 4px 0;
   }
-  
+
   .navigation__link {
     padding: 6px 12px;
     gap: 2px;
   }
-  
+
   .navigation__icon {
     font-size: 1.25rem;
   }
-  
+
   .navigation__label {
     font-size: 0.65rem;
+  }
+}
+
+/* 桌面端适配 - 用户信息显示 */
+@media (min-width: 769px) {
+  .navigation__user {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    margin-top: 8px;
+  }
+
+  .navigation__user-name {
+    font-size: 0.85rem;
+    max-width: none;
+  }
+
+  .navigation__logout {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+}
+
+/* 超宽屏幕 - 展开侧边栏 */
+@media (min-width: 1200px) {
+  .navigation__user {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 16px;
+  }
+
+  .navigation__user-name {
+    font-size: 0.9rem;
+  }
+
+  .navigation__logout {
+    width: 100%;
   }
 }

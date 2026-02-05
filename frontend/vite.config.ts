@@ -12,6 +12,11 @@ export default defineConfig({
         target: 'http://localhost:8080',
         changeOrigin: true,
       },
+      // 代理健康检查请求
+      '/health': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+      },
     },
   },
   // 确保 React 等依赖被正确预构建

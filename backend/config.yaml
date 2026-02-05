@@ -2,6 +2,21 @@ server:
   port: 8080
   mode: debug  # debug, release
 
+database:
+  driver: "mysql"
+  host: "localhost"
+  port: 3306
+  username: "papertok"
+  password: "papertok_password"
+  database: "papertok_db"
+  max_open_conns: 25
+  max_idle_conns: 5
+  max_lifetime: "5m"
+
+jwt:
+  # Secret must be provided via JWT_SECRET environment variable
+  expires_in: "168h"  # 7 days
+
 arxiv:
   base_url: "http://export.arxiv.org/api/query"
   timeout: 10s
@@ -16,7 +31,12 @@ cors:
     - "http://localhost:5173"
     - "http://localhost:5174"
     - "http://localhost:5175"
+    - "http://localhost:5176"
+    - "http://localhost:5177"
+    - "http://localhost:5178"
     - "http://localhost:3000"
+    - "http://127.0.0.1:5173"
+    - "http://127.0.0.1:5176"
     - "https://*.vercel.app"
     - "https://papertok.vercel.app"
     - "https://papertok-api.fly.dev"
